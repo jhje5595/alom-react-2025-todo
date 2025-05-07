@@ -1,0 +1,36 @@
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.container h1 {
+  text-align: center;
+}
+
+.form_container {
+  display: flex;
+  gap: 5px;
+}
+
+.form_container > input {
+  flex: 1;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.form_container > button {
+  border: none;
+  border-radius: 5px;
+  background-color: skyblue;
+  padding: 15px;
+
+  color: white;
+  cursor: pointer;
+}
+
+.todo_list_container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
