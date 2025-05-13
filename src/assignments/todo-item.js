@@ -1,10 +1,10 @@
-import style from "./todo-item.module.css";
+import styles from "./todo-item.module.css";
 
-export default function TodoItem({ content, DeleteTodo }) {
+export default function TodoItem({ content, onDelete }) {
   return (
-    <div className={style.container}>
+    <div className={styles.container}>
       {content}
-      <button onClick={() => DeleteTodo(content)}>❌</button>
+      <button onClick={() => onDelete(content)}>❌</button>
     </div>
   );
 }

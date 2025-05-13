@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import style from "./todo-list.module.css";
+import styles from "./todo-list.module.css";
 import TodoItem from "./todo-item";
 
 function App() {
@@ -15,12 +15,21 @@ function App() {
 
   function onSubmit(e) {
     e.preventDefault();
-    if (toDo === "") return;
+    if (!toDo.trim()) {
+      // 양쪽 공백을 제거해주는 trim함수 사용 -> 공백만 입력되면 입력 불가
+      alert("올바른 값을 입력해주세요.");
+      setTodo("");
+      return;
+    }
+    if (toDos.indexOf(toDo) !== -1) {
+      alert("이미 같은 값이 존재합니다.");
+      return;
+    }
     setTodos((currentArray) => [toDo, ...currentArray]);
     setTodo("");
   }
 
-  function DeleteTodo(content) {
+  function onDelete(content) {
     const newTodo = toDos.filter((todo) => todo !== content);
     setTodos(newTodo);
   }
@@ -38,10 +47,11 @@ function App() {
   }, [toDos, loading]);
 
   return (
-    <div className={style.container}>
+    <div className={styles.container}>
       <h1>My To Dos ({toDos.length})</h1>
-      <form onSubmit={onSubmit} className={style.form_container}>
+      <form onSubmit={onSubmit} className={styles.form_container}>
         <input
+          required
           onChange={onChange}
           value={toDo}
           type="text"
@@ -53,9 +63,9 @@ function App() {
       {toDos.length === 0 ? (
         <div>예정된 할 일이 없습니다.</div>
       ) : (
-        <div className={style.todo_list_container}>
+        <div className={styles.todo_list_container}>
           {toDos.map((toDo, idx) => (
-            <TodoItem key={idx} content={toDo} DeleteTodo={DeleteTodo} />
+            <TodoItem key={idx} content={toDo} onDelete={onDelete} />
           ))}
         </div>
       )}
